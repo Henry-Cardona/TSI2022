@@ -8,6 +8,8 @@ package controlador;
 import javax.persistence.EntityManager;
 import conexion.Conexion;
 import com.mycompany.tsi_web_accessdata.entity.Estado;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Query;
 import javax.xml.registry.infomodel.User;
@@ -18,33 +20,37 @@ import javax.xml.registry.infomodel.User;
 
 public class UserControl {
     
-    public void CrearUser(Estado id){
+    Date fechaahora = new Date();
+    Estado estado = Estado();
+    Objeto objeto = Objeto();
+    
+    public void CrearUser(String estado){
         EntityManager enti = entityManager();
         try {
             enti.getTransaction().begin();
-            enti.persist(id);
+            enti.persist(estado);
             enti.getTransaction().commit();
         } catch (Exception e) {
             enti.getTransaction().rollback();
         }
     }
     
-    public void EditarUser(Estado id){
+    public void EditarUser(String estado){
         EntityManager enti = entityManager();
         try {
             enti.getTransaction().begin();
-            enti.merge(id);
+            enti.merge(estado);
             enti.getTransaction().commit();
         } catch (Exception e) {
             enti.getTransaction().rollback();
         }
     }
     
-    public void EliminarUser(Estado id){
+    public void EliminarUser(String estado){
         EntityManager enti = entityManager();
         try {
             enti.getTransaction().begin();
-            enti.remove(id);
+            enti.remove(estado);
             enti.getTransaction().commit();
         } catch (Exception e) {
             enti.getTransaction().rollback();
@@ -52,11 +58,27 @@ public class UserControl {
     }
     
     public List<User> ExtraerUsuarios(){
-        Query query = entityManager().createQuery("Select * from User u");
-        return query.getResultList();
+        try {
+            Query query = entityManager().createQuery("Select * from User u");
+            return query.getResultList();
+        } catch (Exception e) {
+            List error = new ArrayList();
+            error.add(e);
+            return error;
+        }
     }
+    
+    
     
     private EntityManager entityManager(){
         return Conexion.getInstacia().getFabrica().createEntityManager();
+    }
+
+    private Estado Estado() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private Objeto Objeto() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
