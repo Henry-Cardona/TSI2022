@@ -6,6 +6,7 @@
 package controlador;
 
 import com.mycompany.tsi_web_accessdata.entity.Estado;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import javax.ejb.embeddable.EJBContainer;
@@ -119,50 +120,41 @@ public class EstadoBeanTest {
      */
     @Test
     public void testFindAll() throws Exception {
-        /**
-         * Declaración de todas las variables a utilizar en el test.
-         */
-        
-        System.out.println("findAll");
-        List esperado = Collections.EMPTY_LIST;
+        System.out.println("finAll");
         EntityManager mockEM = Mockito.mock(EntityManager.class);
+        TypedQuery mockTQ = Mockito.mock(TypedQuery.class);
         CriteriaBuilder mockCB = Mockito.mock(CriteriaBuilder.class);
         CriteriaQuery mockCQ = Mockito.mock(CriteriaQuery.class);
-        TypedQuery mockTQ = Mockito.mock(TypedQuery.class);
-        
-        /**
-         * Desarrollo del test.
-         */
-        
-        Mockito.when(mockEM.getCriteriaBuilder()).thenReturn(mockCB);
-        Mockito.when(mockCB.createQuery(Long.class)).thenReturn(mockCQ);
-        Mockito.when(mockEM.createQuery(mockCQ)).thenReturn(mockTQ);
-        Mockito.when(mockTQ.getSingleResult()).thenReturn(esperado);
         EstadoBean cut = new EstadoBean();
-        
-        assertThrows(IllegalStateException.class, () ->{
-            cut.findAll();
-        });
-        
-        cut.em = mockEM;
-//        List resultado = cut.findAll();
-        
-        try {
-            cut.em = null;
-            cut.findAll();
-            fail("El EntityManager era NULO.");
-        } catch (Exception e) {
-        }
+        List esperado = new ArrayList();
+
+        Mockito.when(mockEM.getCriteriaBuilder()).thenReturn(mockCB);
+        Mockito.when(mockCB.createQuery(Estado.class)).thenReturn(mockCQ);
+        Mockito.when(mockEM.createQuery(mockCQ)).thenReturn(mockTQ);
         
         EstadoBean espia = Mockito.spy(EstadoBean.class);
         espia.em = mockEM;
-        
         Mockito.when(espia.getEntityManager()).thenThrow(NullPointerException.class);
         try {
             espia.findAll();
-        } catch (Exception e) {
+        } catch (Exception ex) {
         }
         Mockito.verify(espia, Mockito.times(1)).getEntityManager();
+
+        try {
+            Mockito.when(mockTQ.getResultList()).thenReturn(esperado);
+            cut.em = mockEM;
+            List datos = cut.findAll();
+        } catch (Exception ex) {
+
+        }
+        try {
+            Mockito.when(mockTQ.getResultList()).thenReturn(null);
+            cut.em = mockEM;
+            List datos = cut.findAll();
+        } catch (Exception ex) {
+
+        }
     }
 
     /**
@@ -170,50 +162,60 @@ public class EstadoBeanTest {
      */
     @Test
     public void testFinRange() throws Exception {
-        /**
-         * Declaración de todas las variables a utilizar en el test.
-         */
-        
-        System.out.println("finRange");
-        List esperado = Collections.EMPTY_LIST;
+        System.out.println("findRange");
+        int primer_intervalo = 1;
+        int segundo_intervalo = 2;
+        List esperado = new ArrayList();
+
         EntityManager mockEM = Mockito.mock(EntityManager.class);
         CriteriaBuilder mockCB = Mockito.mock(CriteriaBuilder.class);
         CriteriaQuery mockCQ = Mockito.mock(CriteriaQuery.class);
         TypedQuery mockTQ = Mockito.mock(TypedQuery.class);
-        
-        /**
-         * Desarrollo del test.
-         */
-        
+
         Mockito.when(mockEM.getCriteriaBuilder()).thenReturn(mockCB);
-        Mockito.when(mockCB.createQuery(Long.class)).thenReturn(mockCQ);
+        Mockito.when(mockCB.createQuery(Estado.class)).thenReturn(mockCQ);
         Mockito.when(mockEM.createQuery(mockCQ)).thenReturn(mockTQ);
         Mockito.when(mockTQ.getSingleResult()).thenReturn(esperado);
         EstadoBean cut = new EstadoBean();
-        
-        assertThrows(IllegalStateException.class, () ->{
-            cut.finRange(1, 1);
+
+        assertThrows(IllegalStateException.class, () -> {
+            cut.findAll();
         });
-        
-        cut.em = mockEM;
-//        List resultado = cut.finRange(0, 0);
-//        assertNotNull(resultado);
-//        assertEquals(esperado, resultado);
-        
+
         try {
             cut.em = null;
-            cut.finRange(1, 1);
-            fail("El EntityManager era NULO.");
-        } catch (Exception e) {
+            cut.finRange(primer_intervalo, segundo_intervalo);
+            fail("entitymanager null");
+        } catch (Exception ex) {
+        }
+
+        try {
+            Mockito.when(mockTQ.getResultList()).thenReturn(esperado);
+            cut.em = mockEM;
+            List datos = cut.finRange(primer_intervalo, segundo_intervalo);
+        } catch (Exception ex) {
+
+        }
+        try {
+            Mockito.when(mockTQ.getResultList()).thenReturn(null);
+            cut.em = mockEM;
+            List datos = cut.finRange(primer_intervalo, segundo_intervalo);
+        } catch (Exception ex) {
+
         }
         
+        cut.em = mockEM;
+        List resultado = new ArrayList();
+        resultado = cut.finRange(primer_intervalo, segundo_intervalo);
+        assertNotNull(resultado);
+        assertEquals(esperado, resultado);
+
         EstadoBean espia = Mockito.spy(EstadoBean.class);
         espia.em = mockEM;
-        
         Mockito.when(espia.getEntityManager()).thenThrow(NullPointerException.class);
         try {
-            espia.finRange(1, 1);
-        } catch (Exception e) {
+            espia.finRange(primer_intervalo, segundo_intervalo);
+        } catch (Exception ex) {
         }
         Mockito.verify(espia, Mockito.times(1)).getEntityManager();
     }
