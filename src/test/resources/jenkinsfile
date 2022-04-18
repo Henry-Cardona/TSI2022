@@ -7,21 +7,11 @@ def jsonParse(def json){
 
 
 pipeline {
-    agent any 
+    agent { label 'master'}
     stages {
-        stage('Build') { 
+        stage('test') { 
             steps {
-                // 
-            }
-        }
-        stage('Test') { 
-            steps {
-                // 
-            }
-        }
-        stage('Deploy') { 
-            steps {
-                // 
+                sh "mvn clean verify" 
             }
         }
     }
