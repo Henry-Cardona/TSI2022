@@ -4,9 +4,7 @@ pipeline {
     stages {
         stage('test') { 
             steps {
-                dir ("Sources Packages/jenkins/jenkinsfile") {
-                    sh "mvn clean verify" 
-                }
+                sh "mvn clean verify" 
             }
         }
     }
