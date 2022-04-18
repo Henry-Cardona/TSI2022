@@ -11,7 +11,7 @@ pipeline {
     stages {
         stage('test') { 
             steps {
-                dir ("src/test/resources") {
+                dir ("Other Test Sources/src/test/resources/jenkinsfile") {
                     sh "mvn clean verify" 
                 }
             }
