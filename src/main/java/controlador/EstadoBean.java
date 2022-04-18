@@ -24,6 +24,12 @@ public class EstadoBean extends AbstractDataAccesss<Estado> implements Serializa
     @PersistenceContext(unitName = "my_persistence_unit")
     EntityManager em;
     
+    public final static String NOMBRE_USUARIO = "NO DISPONIBLE";
+    
+    public String getNombreUsuario(final Integer idUsuario){
+        return NOMBRE_USUARIO;
+    }
+    
     public EstadoBean(){
         super(Estado.class);
     }

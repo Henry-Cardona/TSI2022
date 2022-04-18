@@ -24,7 +24,7 @@ import javax.persistence.TemporalType;
  * @author henry
  */
 @MappedSuperclass
-@Table(name = "tipo_objeto", catalog = "postgres", schema = "public")
+@Table(name = "tipo_objeto", schema = "public")
 public class TipoObjeto implements Serializable {
 
     private static final long serialVersionUID = 1L;

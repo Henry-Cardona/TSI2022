@@ -25,7 +25,7 @@ import javax.validation.constraints.Size;
  * @author henry
  */
 @MappedSuperclass
-@Table(name = "estado", catalog = "postgres", schema = "public")
+@Table(name = "estado", schema = "public")
 public class Estado implements Serializable {
 
     private static final long serialVersionUID = 1L;
