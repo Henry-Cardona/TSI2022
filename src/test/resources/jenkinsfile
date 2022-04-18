@@ -1,0 +1,28 @@
+
+import groovy.json.JsonSluperClassic
+
+def jsonParse(def json){
+    new groovy.json.JsonSluperClassic().parseText(json)
+}
+
+
+pipeline {
+    agent any 
+    stages {
+        stage('Build') { 
+            steps {
+                // 
+            }
+        }
+        stage('Test') { 
+            steps {
+                // 
+            }
+        }
+        stage('Deploy') { 
+            steps {
+                // 
+            }
+        }
+    }
+}
