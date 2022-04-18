@@ -7,7 +7,7 @@ def jsonParse(def json){
 
 
 pipeline {
-    agent { label 'master'}
+    agent { label 'main'}
     stages {
         stage('test') { 
             steps {
