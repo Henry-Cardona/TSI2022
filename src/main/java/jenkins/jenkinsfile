@@ -5,7 +5,6 @@ pipeline {
         stage('test') { 
             steps {
                 dir("TSI_WEB_AccessData"){
-                    bat "mvn install:install-file -DgroupId=redisapp -DartifactId=redisapp -Dversion=1.0 -dpackaging=jar - Dfile="redis app\redisapp.jar""
                     bat "mvn clean verify"
                 } 
             }
