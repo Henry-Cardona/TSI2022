@@ -5,7 +5,7 @@ pipeline {
         stage('test') { 
             steps {
                 dir("TSI_WEB_AccessData"){
-                    sh "mvn clean verify"
+                    bat "mvn clean verify"
                 } 
             }
         }
