@@ -28,12 +28,21 @@
             <dependency>
                 <groupId>org.jboss.arquillian</groupId>
                 <artifactId>arquillian-bom</artifactId>
-                <version>1.7.0.Alpha10</version>
+                <version>${arquillian-bom.version}</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
+            
         </dependencies>
     </dependencyManagement>
+    
+    
+    <!--testResources>
+        <testResource>
+            <directory>src/test/resources</directory>
+            <filtering>true</filtering>
+       </testResource>
+    </testResources-->
     
     <dependencies>
         <dependency>
@@ -62,8 +71,13 @@
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <version>42.3.1</version>
+            <version>42.2.4</version>
         </dependency>
+        <!--dependency>
+            <groupId>postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>9.4-1202.jdbc4</version>
+        </dependency-->
         <!--dependency>
             <groupId>org.eclipse.persistence</groupId>
             <artifactId>javax.persistence</artifactId>
@@ -128,6 +142,16 @@
     </dependencies>
     
     <profiles>
+        <profile>
+            <id>arq-jbossas-remote</id>
+            <dependencies>
+                <dependency>
+                    <groupId>org.jboss.as</groupId>
+                    <artifactId>jboss-as-arquillian-container-remote</artifactId>
+                    <scope>test</scope>
+                </dependency>
+            </dependencies>
+        </profile>
         <profile>
             <id>arquillian-payara</id>
             <activation>
@@ -251,7 +275,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
-                <version>2.19.1</version>
+                <version>${maven-failsafe-plugin.version}</version>
                 <executions>
                     <execution>
                         <id>integration-test</id>
@@ -270,6 +294,11 @@
                             <systemPropertyVariables>
                                 <arquillian.launch>payara-embedded-all</arquillian.launch>
                             </systemPropertyVariables>
+                            <!--systemPropertyVariables>
+                                <arquillianResourcesXml>
+                                    ${project.basedir}/Other Sources/resources-arquillian/persistence-arquillian.xml
+                                </arquillianResourcesXml>
+                            </systemPropertyVariables-->
                         </configuration>
                     </execution>
                 </executions>
