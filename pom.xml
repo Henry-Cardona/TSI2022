@@ -272,7 +272,7 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
+            <!--plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <version>${maven-failsafe-plugin.version}</version>
@@ -294,15 +294,10 @@
                             <systemPropertyVariables>
                                 <arquillian.launch>payara-embedded-all</arquillian.launch>
                             </systemPropertyVariables>
-                            <!--systemPropertyVariables>
-                                <arquillianResourcesXml>
-                                    ${project.basedir}/Other Sources/resources-arquillian/persistence-arquillian.xml
-                                </arquillianResourcesXml>
-                            </systemPropertyVariables-->
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>
+            </plugin-->
         </plugins>
     </build>
 </project>

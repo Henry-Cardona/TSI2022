@@ -43,22 +43,22 @@ import org.junit.jupiter.api.extension.ExtendWith;
 @ExtendWith(ArquillianExtension.class)
 public class EstadoBeanIT {
     
-    @Deployment
-    @RunAsClient
-    public static WebArchive crearDespliegue(){
-        WebArchive salida = ShrinkWrap.create(WebArchive.class)
-                .addPackage("com.mycompany.tsi_web_accessdata.entity")
-                .addAsResource("persistence-arquillian.xml")
-                .addClass(AbstractDataAccesss.class)
-                .addClass(EstadoBeanTest.class)
-                .addClass(JAXRSConfiguration.class)
-                .addClass(EstadoBeanIT.class)
-                .addAsResource("jenkins/META-INF/persistence.xml","jenkins/META-INF/persistence.xml")
-                .addAsResource("jenkins/META-INF/sql/datos.sql","jenkins/META-INF/sql/datos.sql")
-                .addAsWebInfResource(EmptyAsset.INSTANCE,"beans.xml");
-        System.out.println(salida.toString(true));
-        return salida;
-    }
+//    @Deployment
+//    @RunAsClient
+//    public static WebArchive crearDespliegue(){
+//        WebArchive salida = ShrinkWrap.create(WebArchive.class)
+//                .addPackage("com.mycompany.tsi_web_accessdata.entity")
+//                .addAsResource("persistence-arquillian.xml")
+//                .addClass(AbstractDataAccesss.class)
+//                .addClass(EstadoBeanTest.class)
+//                .addClass(JAXRSConfiguration.class)
+//                .addClass(EstadoBeanIT.class)
+//                .addAsResource("jenkins/META-INF/persistence.xml","jenkins/META-INF/persistence.xml")
+//                .addAsResource("jenkins/META-INF/sql/datos.sql","jenkins/META-INF/sql/datos.sql")
+//                .addAsWebInfResource(EmptyAsset.INSTANCE,"beans.xml");
+//        System.out.println(salida.toString(true));
+//        return salida;
+//    }
     
     @ArquillianResource
     URL url;
