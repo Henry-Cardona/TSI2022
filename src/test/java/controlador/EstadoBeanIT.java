@@ -42,7 +42,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
  */
 @ExtendWith(ArquillianExtension.class)
 public class EstadoBeanIT {
-    
+    //esto es una prueba
 //    @Deployment
 //    @RunAsClient
 //    public static WebArchive crearDespliegue(){
